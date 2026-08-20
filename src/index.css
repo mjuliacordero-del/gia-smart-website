@@ -1,0 +1,264 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   Gia / She Sells Premium — Brand foundation
+   Authority: July 22, 2026 She Sells Premium Masterclass Workbook
+   Tokens are measured, not invented. Do not substitute fonts or hexes.
+   ========================================================================== */
+
+:root {
+  /* Core roles */
+  --bg: #f5f5f1;            /* Status Cream — primary page canvas */
+  --surface: #ffffff;       /* Pure Surface — cards, elevated panels */
+  --fg: #322b19;            /* Authority Charcoal — primary text/headlines */
+  --muted: #6a6a6a;         /* Quiet Ink — secondary text */
+  --border: #c7d1d3;        /* Mineral Rule — hairlines, dividers */
+  --accent: #a89d60;        /* Olive Gold — PRIMARY accent (headlines, eyebrows) */
+  --accent-secondary: #7f7013; /* Deep Olive — deep emphasis / brand blocks */
+  --accent-light: #bcae55;  /* Bright gold — accents on dark surfaces (legibility) */
+  --sage-mineral: #b4c5bd;  /* Sage / frosted-glass mineral — cool contrast panels */
+  --sage-deep: #8ba095;     /* Deeper sage-mineral */
+
+  /* Extended palette (from measured workbook set) */
+  --status-cream: #f5f5f1;
+  --pure-surface: #ffffff;
+  --authority-charcoal: #322b19;
+  --quiet-ink: #6a6a6a;
+  --mineral-rule: #c7d1d3;
+  --olive-gold: #a89d60;
+  --deep-olive: #7f7013;
+  --soft-taupe: #f1f0ec;
+  --mineral-wash: #e4e9ec;
+  --olive-gold-soft: #e8e8da;
+  --olive-gold-hover: #b5af84;
+  --olive-deep-2: #5c512b;
+  --charcoal-2: #494333;
+  --ink: #0f0d06;
+
+  /* Type */
+  --font-display: "Poppins", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-editorial: "EB Garamond", Georgia, "Times New Roman", serif;
+
+  /* Layout seed */
+  --radius: 8px;
+  --radius-sm: 4px;
+  --radius-lg: 12px;
+  --border-weight: 1px;
+  --space-unit: 8px;
+  --control-height: 44px;
+  --tracking-eyebrow: 0.22em;
+  --line-height-body: 1.55;
+  --line-height-display: 1.06;
+  --shadow-soft: 0 18px 60px -24px rgba(50, 43, 25, 0.22);
+  --shadow-lift: 0 30px 90px -30px rgba(50, 43, 25, 0.28);
+  --ease-authority: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Expose brand tokens to Tailwind utilities (bg-bg, text-fg, border-border, …) */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-light: var(--accent-light);
+  --color-soft-taupe: var(--soft-taupe);
+  --color-mineral-wash: var(--mineral-wash);
+  --color-olive-gold-soft: var(--olive-gold-soft);
+  --color-ink: var(--ink);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-editorial: var(--font-editorial);
+
+  --radius-brand: var(--radius);
+  --ease-authority: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ------------------------------------------------------------------ base -- */
+* {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  background: var(--bg);
+  color: var(--fg);
+  /* Lenis drives scrolling; keep native smooth off */
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: var(--line-height-body);
+  background: var(--bg);
+  color: var(--fg);
+  overflow-x: clip;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* In @layer base so Tailwind `text-*` utilities can override the heading
+   colour (unlayered rules otherwise beat layered utilities in the cascade). */
+@layer base {
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: var(--line-height-display);
+    color: var(--fg);
+    margin: 0;
+    letter-spacing: -0.015em;
+  }
+}
+
+::selection {
+  background: var(--olive-gold);
+  color: var(--surface);
+}
+
+/* Cream page grain — restrained, not textured hustle */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* -------------------------------------------------------------- helpers -- */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.chapter-label {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--fg);
+}
+
+.accent-text { color: var(--accent); }
+
+.display-hero {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.028em;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: var(--control-height);
+  padding: 0 1.6rem;
+  border-radius: 999px;
+  border: var(--border-weight) solid transparent;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.5s var(--ease-authority), background-color 0.4s var(--ease-authority),
+    color 0.4s var(--ease-authority), border-color 0.4s var(--ease-authority), box-shadow 0.5s var(--ease-authority);
+  will-change: transform;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+.btn-primary {
+  background: var(--fg);
+  color: var(--bg);
+  box-shadow: var(--shadow-soft);
+}
+.btn-primary:hover { background: var(--ink); box-shadow: var(--shadow-lift); }
+
+.btn-accent {
+  background: var(--accent);
+  color: var(--fg);
+}
+.btn-accent:hover { background: #9a8f4e; }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--fg);
+  border-color: color-mix(in oklab, var(--fg) 26%, transparent);
+}
+.btn-secondary:hover {
+  border-color: var(--fg);
+  background: color-mix(in oklab, var(--fg) 5%, transparent);
+}
+
+/* Hairline rule */
+.rule {
+  border: 0;
+  border-top: var(--border-weight) solid var(--border);
+}
+
+/* Field */
+.field {
+  width: 100%;
+  min-height: var(--control-height);
+  border: var(--border-weight) solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--fg);
+  padding: 0 1rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: border-color 0.3s var(--ease-authority), box-shadow 0.3s var(--ease-authority);
+}
+.field::placeholder { color: color-mix(in oklab, var(--muted) 80%, transparent); }
+.field:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 22%, transparent);
+}
+
+/* Reveal helper for line-mask animations — pad so italic descenders (g, y)
+   are not clipped by the overflow used for the rise reveal. */
+.line-mask {
+  overflow: hidden;
+  display: block;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+/* Focus visibility for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

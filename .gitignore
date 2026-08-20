@@ -1,0 +1,13 @@
+# dependencies (reinstalled with `npm install` on each machine)
+node_modules
+
+# build output (regenerated with `npm run build`)
+dist
+
+# local / editor / OS
+*.local
+.DS_Store
+.vscode
+.idea
+npm-debug.log*
+tsconfig.tsbuildinfo
